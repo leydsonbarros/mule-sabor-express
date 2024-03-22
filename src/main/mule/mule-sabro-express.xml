@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd"></mule>
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="mule-sabro-expressFlow" doc:id="74f59247-2e58-4f6b-962b-62a433eb9ace" >
+		<logger level="INFO" doc:name="start" doc:id="0366ff61-0de3-43a5-855a-f750f7066509" />
+		<http:request method="GET" doc:name="Request" doc:id="6cc5dce5-306e-4e58-81bb-ad550fa9eadf" config-ref="HTTP_Request_configuration" url="https://guilhermeonrails.github.io/api-restaurantes/restaurantes.json" />
+		<choice doc:name="Choice" doc:id="9c30c16c-914f-4100-b0e3-9620721d820f" >
+			<when expression='#[vars.restaurante == "none"]'>
+				<logger level="INFO" doc:name="Logger" doc:id="cd805775-ff4b-45dd-9957-f6be21321298" message="Restaurantes"/>
+				<ee:transform doc:name="Transform Message" doc:id="434237d1-1193-4601-8139-6fd0b82e6851" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+			</when>
+			<otherwise >
+				<flow-ref doc:name="filterFlow" doc:id="4418bbba-99c9-45c3-bd78-ee4430c34072" name="filterFlow"/>
+			</otherwise>
+		</choice>
+		<logger level="INFO" doc:name="final" doc:id="72e92503-9323-48f6-8eb9-39f227e0e2bb" message="#[payload]"/>
+	</flow>
+</mule>
