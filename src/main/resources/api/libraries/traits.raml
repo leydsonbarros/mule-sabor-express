@@ -1,0 +1,24 @@
+#%RAML 1.0 Library
+usage: All common traits
+
+traits:
+  client-id-required:
+    headers:
+      client_id:
+        type: string
+      client_secret:
+        type: string
+  glossary-title-required :
+    queryParameters:  
+      name:
+        description: |
+        type: string
+        example: "Harry Potter"
+        required: true
+      paginacao:
+        type: nil | number
+        required: false
+        example: 1
+        default: 1
+
+ 

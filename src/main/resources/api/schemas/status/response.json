@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description":"Nome da aplicação"
+    },
+    "version": {
+      "type": "string",
+      "default":"1.0",
+      "description": "Versão da aplicação"
+    },
+    "requestTime": {
+      "type": ["string","null"],
+      "example": "02/06/2021 dando exemplo",
+      "description":"Hora da requisição"
+    }
+  },
+  "required": [
+    "title",
+    "version",
+    "requestTime"
+  ]
+}

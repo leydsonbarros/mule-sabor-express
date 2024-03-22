@@ -1,0 +1,63 @@
+#%RAML 1.0 
+title: Sabor Express
+
+#Setor de protocolos
+version: 1.0
+#baseUri: http://{hostAplicacaoMulesoft.io}/api/${version}
+#Protocolos utilizados na aplicação
+protocols: [ HTTPS, HTTP ]
+#Tipos de midias utilizadas na aplicação
+mediaType: [ application/json, application/xml ]
+#Autenticações utilizadas na aplicação
+
+
+
+#Setor de documentação no RAML
+documentation:
+ - title: Sabor Express
+ #Referenciamento do conteúdo da documentação na pasta docs
+   content: !include docs/content.txt
+  
+
+# Setor de autenticação
+
+#Setor para redirecionamento de arquivos específicos
+uses:
+
+  #Redirecionamento para types (mapeamento dos campos de cada endpoint)
+  types: libraries/types.raml
+  #Redirecionamento para resourceTypes (response code e tratamento para cada retorno existente da aplicação)
+  resourceTypes: libraries/resourceTypes.raml
+  #Redirecionamento para traits (tratamento de headers e query parameters de cada endpoint)
+  traits: libraries/traits.raml
+
+
+# Endpoint simples método GET para exemplificar formatação, mapeamento dos campos e exemplo base
+/status:
+  description: Exemplo simples método GET para verificar se a aplicação está disponível ou não.
+  #Setando o mapeamento dos campos e um exemplo de retorno
+  type:
+    resourceTypes.collection:
+      typeCollection: types.statusReturn
+      exampleCollection: !include examples/status/response.json
+
+# Método do endpoint
+  get:   
+    description: Versão GET do endpoint.
+    
+/restaurantes:
+  type:
+    resourceTypes.collection:
+      typeCollection: types.restaurantesReturn []
+      exampleCollection: !include /examples/restaurantes/response.json
+  get: 
+    queryParameters:
+      nome: 
+    responses: 
+      200: 
+        body: 
+          application/csv: 
+            type: types.customFile
+            example: !include /examples/restaurantes/response.json
+ 
+

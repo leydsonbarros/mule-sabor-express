@@ -1,0 +1,33 @@
+#%RAML 1.0 Library
+usage: Types
+
+types:
+  ErrorMessageDefinition:
+    type: object
+    properties: 
+      message?: string | nil
+      processor?: string | nil
+      errors?: StackErrorDefinition[]
+      
+  StackErrorDefinition:
+    type: object
+    properties: 
+      code: string | nil
+      message: string | nil
+      
+
+  statusReturn: 
+   type: !include ../schemas/status/response.json
+
+  restaurantesReturn: 
+   type: !include /schemas/restaurantes/response.json
+
+  userPicture:
+    type: file
+    fileTypes: ['image/jpeg']
+    maxLength: 1048576
+  customFile:
+    type: file
+    fileTypes: ['*/*'] # any file type allowed
+    maxLength: 1048576
+  

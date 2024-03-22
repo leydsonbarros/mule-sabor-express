@@ -1,0 +1,13 @@
+{
+  "message": "invalid request",
+  "processor": "API Kit Validation",
+  "errors": [{
+      "code": "ERR-5432",
+      "message": "First name cannot have fancy characters"
+		},
+    {
+      "code": "ERR-10332143",
+      "message": "Password cannot be blank"
+		}
+	]
+}

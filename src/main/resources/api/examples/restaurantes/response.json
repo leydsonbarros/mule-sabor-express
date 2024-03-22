@@ -1,0 +1,20 @@
+[
+   {
+        "Company":"McDonald’s",
+        "Item":"Hamburger",
+        "price":32.42,
+        "description":"Uma explosão de sabores em cada mordida."
+    },
+    {
+        "Company":"McDonald’s",
+        "Item":"Cheeseburger",
+        "price":38.81,
+        "description":"Uma opção saudável e equilibrada."
+    },
+    {
+        "Company":"McDonald’s",
+        "Item":"Double Cheeseburger",
+        "price":50.18,
+        "description":"Leve e saboroso, perfeito a qualquer hora."
+    }
+]
