@@ -10,7 +10,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/json
 ---
-payload]]></ee:set-payload>
+payload filter ((item,index)-> item.Company == vars.restaurante)]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
 	</flow>
